@@ -1,0 +1,48 @@
+# Local dev stack.
+#   pnpm db:up                         Postgres only; run the apps on the host with `pnpm dev`
+#   docker compose --profile full up   Postgres + API + web, all in containers
+name: tamid
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: tamid
+      POSTGRES_PASSWORD: tamid
+      POSTGRES_DB: tamid
+    ports:
+      - '${DB_PORT:-5433}:5432' # 5433 on the host so it does not collide with a local Postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./docker/db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U tamid -d tamid']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    profiles: [full]
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      PORT: 3001
+      WEB_ORIGIN: http://localhost:3000
+      DATABASE_URL: postgresql://tamid:tamid@db:5432/tamid
+    ports:
+      - '3001:3001'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    profiles: [full]
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - '3000:3000'
+
+volumes:
+  db-data:
