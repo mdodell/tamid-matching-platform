@@ -257,6 +257,9 @@ importers:
       '@mantine/core':
         specifier: ^9.8.0
         version: 9.8.0(@mantine/hooks@9.8.0(react@19.3.1))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      '@mantine/form':
+        specifier: ^9.8.0
+        version: 9.8.0(react@19.3.1)
       '@mantine/hooks':
         specifier: ^9.8.0
         version: 9.8.0(react@19.3.1)
@@ -272,6 +275,9 @@ importers:
       react-dom:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
     devDependencies:
       '@types/node':
         specifier: ^26.6.6
@@ -766,6 +772,11 @@ packages:
       '@mantine/hooks': 9.8.0
       react: ^19.2.0
       react-dom: ^19.2.0
+
+  '@mantine/form@9.8.0':
+    resolution: {integrity: sha512-ECed/ZR/uzCrhm8R5oT723l/Ft0AcM6RDfgwq3bXcK+3bJ9h4dSrr2GyIpwR9fjJ0dwM2JCl//IFFXP4QHlKrw==}
+    peerDependencies:
+      react: ^19.2.0
 
   '@mantine/hooks@9.8.0':
     resolution: {integrity: sha512-fUA3PS8Ys2kih6VEuozgdEO0UyiGhryTJqx+Bf2lxee1XpXQ0XFXsQY7lNB4f+eBDzYCczYykQjIIuUzyJft7A==}
@@ -2491,6 +2502,10 @@ packages:
   jsonc-parser@3.3.1:
     resolution: {integrity: sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ==}
 
+  klona@2.0.6:
+    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
+    engines: {node: '>= 8'}
+
   libphonenumber-js@1.13.16:
     resolution: {integrity: sha512-tIOCM9yx2Go6d5/ZANe0K+G4AZek1Ymx81HxQpf19Sri4zMP95eQbKdnUGHAvFQ4nx0PeLhFqvAfisTADXj3tQ==}
 
@@ -3908,6 +3923,13 @@ snapshots:
       type-fest: 5.10.0
     transitivePeerDependencies:
       - '@types/react'
+
+  '@mantine/form@9.8.0(react@19.3.1)':
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      fast-deep-equal: 3.1.3
+      klona: 2.0.6
+      react: 19.3.1
 
   '@mantine/hooks@9.8.0(react@19.3.1)':
     dependencies:
@@ -5489,6 +5511,8 @@ snapshots:
   json5@2.2.3: {}
 
   jsonc-parser@3.3.1: {}
+
+  klona@2.0.6: {}
 
   libphonenumber-js@1.13.16: {}
 
