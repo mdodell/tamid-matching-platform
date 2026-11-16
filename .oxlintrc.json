@@ -4,5 +4,5 @@
   "categories": {
     "correctness": "error"
   },
-  "ignorePatterns": ["**/dist/**", "**/build/**", "**/coverage/**"]
+  "ignorePatterns": ["**/routeTree.gen.ts", "**/dist/**", "**/build/**", "**/coverage/**"]
 }
