@@ -10,20 +10,21 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { schemaResolver, useForm } from '@mantine/form';
 import { createFileRoute } from '@tanstack/react-router';
+import { z } from 'zod';
 
 export const Route = createFileRoute('/login')({
   head: () => ({ meta: [{ title: 'Log in | TAMID Matching Platform' }] }),
   component: Login,
 });
 
-interface LoginValues {
-  email: string;
-  password: string;
-}
+const loginSchema = z.object({
+  email: z.string().trim().min(1, 'Email is required').pipe(z.email('Enter a valid email address')),
+  password: z.string().min(1, 'Password is required'),
+});
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type LoginValues = z.infer<typeof loginSchema>;
 
 // Stub: will be wired to the API in a later ticket.
 function handleLogin(values: LoginValues) {
@@ -34,14 +35,7 @@ function Login() {
   const form = useForm<LoginValues>({
     mode: 'uncontrolled',
     initialValues: { email: '', password: '' },
-    validate: {
-      email: (value) => {
-        const email = value.trim();
-        if (!email) return 'Email is required';
-        return EMAIL_PATTERN.test(email) ? null : 'Enter a valid email address';
-      },
-      password: (value) => (value ? null : 'Password is required'),
-    },
+    validate: schemaResolver(loginSchema, { sync: true }),
   });
 
   return (
