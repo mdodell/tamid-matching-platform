@@ -11,7 +11,11 @@
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "typecheck": "pnpm -r --if-present typecheck",
-    "test": "pnpm -r --if-present test"
+    "test": "pnpm -r --if-present test",
+    "db:up": "docker compose up -d --wait db",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v && docker compose up -d --wait db",
+    "docker:full": "docker compose --profile full up --build"
   },
   "devDependencies": {
     "oxfmt": "^0.78.0",
