@@ -5,11 +5,11 @@ import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { AppModule } from '../src/app.module.js';
 import { configureApp } from '../src/app.setup.js';
-import { DatabaseService } from '../src/database/database.service.js';
+import { PrismaService } from '../src/database/prisma.service.js';
 
 async function createApp(dbUp: boolean) {
   const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
-    .overrideProvider(DatabaseService)
+    .overrideProvider(PrismaService)
     .useValue({ ping: async () => dbUp })
     .compile();
   const app = moduleRef.createNestApplication();

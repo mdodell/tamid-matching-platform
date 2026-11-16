@@ -8,7 +8,7 @@ COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 COPY apps/api/package.json apps/api/
 COPY apps/web/package.json apps/web/
 COPY packages/shared/package.json packages/shared/
-RUN pnpm install --frozen-lockfile --filter @tamid/api...
+RUN pnpm install --frozen-lockfile --ignore-scripts --filter @tamid/api...
 
 COPY tsconfig.base.json ./
 COPY apps/api apps/api

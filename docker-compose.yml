@@ -14,7 +14,6 @@ services:
       - '${DB_PORT:-5433}:5432' # 5433 on the host so it does not collide with a local Postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./docker/db/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U tamid -d tamid']
       interval: 5s
