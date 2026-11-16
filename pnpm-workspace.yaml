@@ -1,3 +1,8 @@
 packages:
   - apps/*
   - packages/*
+
+# @swc/core's install script only checks for a native binary, which ships as an
+# optional dependency. Declining it keeps `pnpm install` from failing in CI.
+allowBuilds:
+  '@swc/core': false
