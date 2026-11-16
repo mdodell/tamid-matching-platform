@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateEnv } from './env.js';
+import { envFilePath, validateEnv } from './env.js';
 
 describe('validateEnv', () => {
   it('applies defaults and coerces PORT', () => {
@@ -14,5 +14,20 @@ describe('validateEnv', () => {
 
   it('rejects an invalid WEB_ORIGIN', () => {
     expect(() => validateEnv({ DATABASE_URL: 'x', WEB_ORIGIN: 'nope' })).toThrow(/WEB_ORIGIN/);
+  });
+});
+
+describe('envFilePath', () => {
+  it('loads .env.local in development, and when NODE_ENV is unset', () => {
+    expect(envFilePath('development')).toBe('.env.local');
+    expect(envFilePath(undefined)).toBe('.env.local');
+  });
+
+  it('loads .env.test in test', () => {
+    expect(envFilePath('test')).toBe('.env.test');
+  });
+
+  it('loads no file in production', () => {
+    expect(envFilePath('production')).toBeUndefined();
   });
 });

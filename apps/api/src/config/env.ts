@@ -17,3 +17,18 @@ export function validateEnv(config: Record<string, unknown>): Env {
   }
   return result.data;
 }
+
+/**
+ * Which env file to load for the current NODE_ENV. Production reads real
+ * environment variables only (Render, Docker), so it loads no file.
+ */
+export function envFilePath(nodeEnv: string | undefined): string | undefined {
+  switch (nodeEnv ?? 'development') {
+    case 'development':
+      return '.env.local';
+    case 'test':
+      return '.env.test';
+    default:
+      return undefined;
+  }
+}
