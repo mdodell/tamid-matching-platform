@@ -15,7 +15,9 @@
     "db:up": "docker compose up -d --wait db",
     "db:down": "docker compose down",
     "db:reset": "docker compose down -v && docker compose up -d --wait db",
-    "docker:full": "docker compose --profile full up --build"
+    "docker:full": "docker compose --profile full up --build",
+    "db:migrate": "pnpm --filter @tamid/api db:migrate",
+    "db:studio": "pnpm --filter @tamid/api db:studio"
   },
   "devDependencies": {
     "oxfmt": "^0.78.0",

@@ -1,9 +1,9 @@
 import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service.js';
+import { PrismaService } from '../database/prisma.service.js';
 
 @Controller('health')
 export class HealthController {
-  constructor(private readonly database: DatabaseService) {}
+  constructor(private readonly database: PrismaService) {}
 
   @Get()
   async check() {
